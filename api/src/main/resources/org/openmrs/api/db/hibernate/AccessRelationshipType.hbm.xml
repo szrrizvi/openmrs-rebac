@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping package="org.openmrs">
+
+<class 
+    name="AccessRelationshipType" 
+    table="access_relationship_type"
+>
+
+    <id
+        name="accessRelationshipTypeId"
+        type="java.lang.Integer"
+        column="access_relationship_type_id"
+        unsaved-value="0"
+    >
+        <generator class="native" />
+    </id>
+
+    <discriminator column="access_relationship_type_id" insert="false" />
+
+		<property name="uuid" type="java.lang.String"
+			column="uuid" length="38" unique="true" />
+
+    <property
+        name="name"
+        type="java.lang.String"
+        not-null="true"
+        length="50"
+        access="field"
+        column="name"
+        unique="true"
+    /> <!-- Accessing field so we don't have to use getName() -->
+    
+    <property
+        name="description"
+        type="java.lang.String"
+        column="description"
+        not-null="true"
+        length="255"
+    />
+  
+</class>
+</hibernate-mapping>

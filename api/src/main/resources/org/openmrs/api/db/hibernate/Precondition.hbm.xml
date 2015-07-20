@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.action">
+	<class name="Precondition" table="precondition">
+	
+		<id name="preconditionId" type="java.lang.Integer" column="precondition_id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		
+		<discriminator column="precondition_id" insert="false" />
+	
+		<property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
+				
+		<many-to-one name="hybridFormula" class="org.openmrs.rebac.HybridFormula" column="hybrid_formula" not-null="true"/>
+	</class>
+</hibernate-mapping>
+		

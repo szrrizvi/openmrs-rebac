@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.action">
+	<class name="Effect" table="effect">
+	
+		<id name="effectId" type="java.lang.Integer" column="effect_id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		
+		<discriminator column="effect_id" insert="false" />
+	
+		<property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
+	
+		<many-to-one name="action" class="Action" column="action_id" not-null="true" insert="false" update="false"/>
+		
+		<many-to-one name="participantA" class="Participant" column="participant_a_id" not-null="true"/>
+		
+		<many-to-one name="participantB" class="Participant" column="participant_b_id" not-null="true"/>
+		
+		<property name="effectType" type="java.lang.String" column="effect_type" length="10"/>
+		
+		<many-to-one name="accessRelationshipType" class="org.openmrs.AccessRelationshipType" column="access_relationship_type_id" not-null="true"/>
+		
+	</class>
+</hibernate-mapping>
+		

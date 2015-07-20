@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping package="org.openmrs">
+
+<class name="PrivilegeAssignment" table="privilege_assignment" lazy="false">
+
+    <id
+        name="privilegeAssignmentId"
+        type="java.lang.Integer"
+        column="privilege_assignment_id"
+        unsaved-value="0"
+    >
+        <generator class="native" />
+    </id>
+    
+    <discriminator column="privilege_assignment_id" insert="false" />
+    
+    <property name="uuid" type="java.lang.String"
+		column="uuid" length="38" unique="true" />
+    
+	<many-to-one
+		name="authorizationPrincipal"
+		column="authorization_principal"
+		class="org.openmrs.AuthorizationPrincipal"
+		not-null="true"
+		lazy = "false"
+	/>
+    
+	<set name="privileges" table="privilege_assignment_privilege" cascade="" order-by="privilege_assignment_id asc" lazy ="false">
+		<key column = "privilege_assignment_id"/>
+		<many-to-many column="privilege" class="org.openmrs.Privilege"/>
+	</set>
+    	
+</class>
+</hibernate-mapping>
+	

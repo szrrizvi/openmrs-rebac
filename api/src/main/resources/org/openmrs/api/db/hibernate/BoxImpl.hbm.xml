@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping package="org.openmrs.rebac">
+
+	<joined-subclass name="BoxImpl" table="box_impl" extends="PolicyImpl">
+	
+		<key column="policy_impl_id" not-null="true" on-delete="cascade" />
+
+		<property
+			name="policyImplId"
+			type="int"
+			not-null="true"
+			column="policy_impl_id"
+			update="false"
+			insert="false"
+		/>
+		
+		<many-to-one
+			name="policy"
+			class="PolicyImpl"
+			column="policy"
+			not-null="true"
+			lazy="false"
+			cascade="save-update, delete"
+		/>
+		
+  		 <property
+        	name="directionStr"
+        	type="java.lang.String"
+        	column="direction_str"
+        	not-null="true"
+        	length="50"
+    	/>
+    	
+ 		<property
+        	name="implicitRelId"
+        	type="java.lang.String"
+        	length="50"
+        	column="implicit_rel_id"
+    	/>
+    	
+    	<many-to-one
+        	name="explicitRelId"
+        	column="explicit_rel_id"
+        	class="org.openmrs.AccessRelationshipType"
+		/>
+		
+		<many-to-one
+        	name="patientRecordRelId"
+        	column="patient_record_rel_id"
+        	class="org.openmrs.RelationshipType"
+		/>
+	</joined-subclass>
+</hibernate-mapping>
+

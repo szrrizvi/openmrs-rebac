@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!-- Implicitly Induced Relation Identifier Beans -->
+<!-- 
+	These beans are used to describe implicitly induced relation identifiers.
+	They are described by the classes in package: org.openmrs.api.rebac.implicitRelations;
+	
+	NOTE: This xml file should only contain beans for describing implicitly induced relation
+		  identifiers.
+ -->
+ 
+<!-- <bean name="<bean name>" class="<fully qualified address of class representing the implicit relation identifier>" /> -->
+
+<bean name="owner" class="org.openmrs.rebac.implicitrelations.Owner"/>
+
+</beans>

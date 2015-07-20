@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.action">
+	<class name="Participant" table="participant">
+	
+		<id name="participantId" type="java.lang.Integer" column="participant_id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		
+		<discriminator column="participant_id" insert="false" />
+			
+		<property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
+		
+		<property name="name" type="java.lang.String" column="name" length="50" unique="true" not-null="true"/>
+	
+		<many-to-one name="action" class="Action" column="action_id" not-null="true" insert="false" update="false"/>
+				 
+		<set name="freeVariables" table="participant_variables" cascade="all">
+			<key column = "participant_id"/>
+			<element column="variable" type="string"/>		
+		</set>
+       	
+	</class>
+</hibernate-mapping>
+		

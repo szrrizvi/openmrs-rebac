@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping package="org.openmrs.rebac">
+
+	<joined-subclass name="ConjunctionImpl" table="conjunction_impl" extends="PolicyImpl">
+	
+		<key column="policy_impl_id" not-null="true" on-delete="cascade" />
+
+		<property
+			name="policyImplId"
+			type="int"
+			not-null="true"
+			column="policy_impl_id"
+			update="false"
+			insert="false"
+		/>
+		
+		<many-to-one
+			name="policyA"
+			class="PolicyImpl"
+			column="policy_a"
+			not-null="true"
+			lazy="false"
+			cascade="save-update, delete"
+		/>
+		
+		<many-to-one
+			name="policyB"
+			class="PolicyImpl"
+			column="policy_b"
+			not-null="true"
+			lazy="false"
+			cascade="save-update, delete"
+		/>
+	</joined-subclass>
+</hibernate-mapping>
+

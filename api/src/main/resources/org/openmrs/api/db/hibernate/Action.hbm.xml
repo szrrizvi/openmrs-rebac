@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.action">
+	<class name="Action" table="action">
+	
+		<id name="actionId" type="java.lang.Integer" column="action_id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		
+		<discriminator column="action_id" insert="false" />
+	
+		<property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
+
+		<property name="name" type="java.lang.String" column="name" length="50" unique="true" not-null="true"/>
+		
+		<many-to-one name="hybridFormula" column="hybrid_formula" class="org.openmrs.rebac.HybridFormula" not-null="true" />
+
+		<many-to-one name="precondition" column="precondition" class="Precondition" not-null="true" cascade="all"/>
+
+		
+		<list name="participants" table="participant" inverse="false" cascade="save-update">
+			<key column="action_id" not-null="true"/>
+			<list-index column="idx"/>
+			<one-to-many class="Participant" />
+		</list>
+		
+		<list name="effects" table="effect" inverse="false" cascade="save-update">
+			<key column="action_id" not-null="true"/>
+			<list-index column="idx"/>
+			<one-to-many class="Effect" />
+		</list>
+
+	</class>
+</hibernate-mapping>
